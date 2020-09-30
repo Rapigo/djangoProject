@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Employee List</h1>
+  {% if emp_list %}
+  <ul>
+    {% for emp in emp_list %}
+      <li>
+        <a href="{{ emp.get_absolute_url }}">{{ emp.emp_id }}</a> ({{emp.emp_name}})
+        {% if emp.man_id %}
+            {% for man in emp_list %}
+                {% if emp.man_id == man.emp_id %}
+                    {{ man.emp_name }}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            {{emp.man_id }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no employees.</p>
+  {% endif %}       
+{% endblock %}
